@@ -1,12 +1,15 @@
 package com.example.mountainsheltercms.user;
 
+import com.example.mountainsheltercms.post.Post;
 import com.example.mountainsheltercms.user.role.Role;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -21,17 +24,20 @@ public class User {
 	private Long id;
 
 	@NotBlank
-	@Size(max = 20)
+	@Size(min = 2, max = 20, message = "Username must be between 2 and 20")
 	private String username;
 
 	@NotBlank
-	@Size(max = 50)
+	@Size(min = 2, max = 50, message = "Email must be between 2 and 50")
 	@Email
 	private String email;
 
 	@NotBlank
-	@Size(max = 120)
+	@Size(min = 5, max = 120, message = "Email must be between 2 and 50")
 	private String password;
+
+	@OneToMany(mappedBy = "user")
+	private List<Post> postList;
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(	name = "user_roles", 
@@ -39,6 +45,9 @@ public class User {
 				inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
 
+	{
+		postList = new ArrayList<>();
+	}
 	public User() {
 	}
 
@@ -87,4 +96,14 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
+
+	public List<Post> getPostList() {
+		return postList;
+	}
+
+	public void setPostList(List<Post> postList) {
+		this.postList = postList;
+	}
+
+
 }
