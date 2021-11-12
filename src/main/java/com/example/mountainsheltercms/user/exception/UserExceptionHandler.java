@@ -13,10 +13,14 @@ public class UserExceptionHandler {
     public ResponseEntity<ErrorInfo> handleException(UserException e){
         HttpStatus httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
 
-        if(UserError.USER_NOT_FOUND.equals(e.getPostError())){
+        if(UserError.EMAIL_IS_TAKEN.equals(e.getUserError()) || UserError.USERNAME_IS_TAKEN.equals(e.getUserError())){
             httpStatus = HttpStatus.BAD_REQUEST;
         }
 
-        return ResponseEntity.status(httpStatus).body(new ErrorInfo(e.getPostError().getMessage()));
+        if(UserError.USER_NOT_FOUND.equals(e.getUserError())){
+            httpStatus = HttpStatus.BAD_REQUEST;
+        }
+
+        return ResponseEntity.status(httpStatus).body(new ErrorInfo(e.getUserError().getMessage()));
     }
 }

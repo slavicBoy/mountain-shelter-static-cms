@@ -9,7 +9,7 @@ public class UserException extends RuntimeException{
         this.userError = userError;
     }
 
-    public UserError getPostError() {
+    public UserError getUserError() {
         return userError;
     }
 }
