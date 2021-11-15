@@ -1,4 +1,4 @@
-package shared;
+package com.example.mountainsheltercms.shared;
 
 public class ErrorInfo {
     private String message;

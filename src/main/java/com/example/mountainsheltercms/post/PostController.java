@@ -25,26 +25,26 @@ public class PostController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")
     public ResponseEntity<?> postPost(@Valid @RequestBody PostDto postDto) {
         return ResponseEntity.ok(postService.postPost(postDto));
     }
 
     @GetMapping("/get/{id}")
-    public Post findById(@PathVariable long id){
+    public PostDto findById(@PathVariable long id) {
         return postService.findById(id);
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR')")
-    public ResponseEntity<?> updatePost(@Valid @RequestBody PostDto postDto, @PathVariable long id){
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")
+    public ResponseEntity<?> updatePost(@Valid @RequestBody PostDto postDto, @PathVariable long id) {
         return ResponseEntity.ok(postService.updatePost(postDto, id));
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR')")
-    public ResponseEntity<?> deletePost(@PathVariable long id){
-         return ResponseEntity.ok(postService.deletePost(id));
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")
+    public ResponseEntity<?> deletePost(@PathVariable Long id) {
+        return ResponseEntity.ok(postService.deletePost(id));
     }
 
 }

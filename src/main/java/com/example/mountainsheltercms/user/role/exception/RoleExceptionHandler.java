@@ -1,12 +1,10 @@
 package com.example.mountainsheltercms.user.role.exception;
 
-import com.example.mountainsheltercms.user.exception.UserError;
-import com.example.mountainsheltercms.user.exception.UserException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import shared.ErrorInfo;
+import com.example.mountainsheltercms.shared.ErrorInfo;
 
 @ControllerAdvice
 public class RoleExceptionHandler {

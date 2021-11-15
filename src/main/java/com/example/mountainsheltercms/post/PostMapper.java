@@ -16,6 +16,7 @@ public class PostMapper {
                 .map(TagMapper::toDto)
                 .collect(Collectors.toList());
 
+        postDto.setId(post.getId());
         postDto.setTitle(post.getTitle());
         postDto.setContent(post.getContent());
         postDto.setImg(post.getImg());

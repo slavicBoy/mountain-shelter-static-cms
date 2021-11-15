@@ -35,8 +35,9 @@ public class PostService {
                 .collect(Collectors.toList());
     }
 
-    public Post findById(long id) {
+    public PostDto findById(long id) {
         return postRepository.findById(id)
+                .map(PostMapper::toDto)
                 .orElseThrow(() -> new PostException(PostError.POST_NOT_FOUND));
     }
 
@@ -58,7 +59,7 @@ public class PostService {
     private User getUserToAssign(PostDto postDto) {
         return userRepository.findById(postDto.getUserDto()
                         .getId())
-                        .orElseThrow(() -> new UserException(UserError.USER_NOT_FOUND));
+                .orElseThrow(() -> new UserException(UserError.USER_NOT_FOUND));
 
     }
 
