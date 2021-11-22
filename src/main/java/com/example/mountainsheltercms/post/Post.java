@@ -2,10 +2,12 @@ package com.example.mountainsheltercms.post;
 
 import com.example.mountainsheltercms.tag.Tag;
 import com.example.mountainsheltercms.user.User;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +24,9 @@ public class Post {
     @NotBlank(message = "Content can't be empty")
     @Size(min = 2, max = 10000, message = "Content must be between 2 and 10000 characters")
     private String content;
+    @Column(name = "date_of_adding_reservation")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate postDate;
     @NotBlank(message = "Img can't be empty")
     @Size(min = 2, max = 100, message = "Img must be between 2 and 100")
     private String img;
@@ -38,10 +43,11 @@ public class Post {
     public Post() {
     }
 
-    public Post(String title, String content, String img) {
+    public Post(String title, String content, String img, LocalDate postDate) {
         this.title = title;
         this.content = content;
         this.img = img;
+        this.postDate = postDate;
     }
 
     public long getId() {
@@ -90,6 +96,14 @@ public class Post {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public LocalDate getPostDate() {
+        return postDate;
+    }
+
+    public void setPostDate(LocalDate postDate) {
+        this.postDate = postDate;
     }
 
     @Override

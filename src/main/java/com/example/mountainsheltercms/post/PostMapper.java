@@ -4,6 +4,7 @@ import com.example.mountainsheltercms.tag.TagDto;
 import com.example.mountainsheltercms.tag.TagMapper;
 import com.example.mountainsheltercms.user.UserMapper;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,6 +21,7 @@ public class PostMapper {
         postDto.setTitle(post.getTitle());
         postDto.setContent(post.getContent());
         postDto.setImg(post.getImg());
+        postDto.setPostDate(post.getPostDate());
         postDto.setUserDto(UserMapper.toDto(post.getUser()));
         postDto.setTagsDto(tagDtoList);
 
@@ -32,6 +34,7 @@ public class PostMapper {
         post.setContent(postDto.getContent());
         post.setTitle(postDto.getTitle());
         post.setImg(postDto.getImg());
+        post.setPostDate(LocalDate.now());
 
         return post;
     }

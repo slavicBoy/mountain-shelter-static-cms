@@ -6,6 +6,7 @@ import com.example.mountainsheltercms.user.User;
 import com.example.mountainsheltercms.user.UserDto;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @AllArgsConstructor
@@ -18,6 +19,7 @@ public class PostDto {
     private String title;
     private String content;
     private String img;
+    private LocalDate postDate;
     private List<TagDto> tagsDto;
     private UserDto userDto;
 }
