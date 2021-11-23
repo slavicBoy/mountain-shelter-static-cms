@@ -4,14 +4,18 @@ import com.example.mountainsheltercms.post.exception.PostError;
 import com.example.mountainsheltercms.post.exception.PostException;
 import com.example.mountainsheltercms.post.repository.PostRepository;
 import com.example.mountainsheltercms.tag.Tag;
-import com.example.mountainsheltercms.tag.TagDto;
 import com.example.mountainsheltercms.tag.TagMapper;
 import com.example.mountainsheltercms.user.User;
 import com.example.mountainsheltercms.user.exception.UserError;
 import com.example.mountainsheltercms.user.exception.UserException;
 import com.example.mountainsheltercms.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,10 +33,15 @@ public class PostService {
     }
 
     public List<PostDto> getPosts() {
-        return postRepository.findAll()
-                .stream()
+        return postRepository.findAll().stream()
                 .map(PostMapper::toDto)
                 .collect(Collectors.toList());
+    }
+
+    public PostPaginationDto getPostsWithPagination(Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Post> postsFromDataBase = postRepository.findAll(pageable);
+        return PostMapper.toDtoWithPagination(postsFromDataBase);
     }
 
     public PostDto findById(long id) {

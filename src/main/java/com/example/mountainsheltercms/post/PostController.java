@@ -20,8 +20,15 @@ public class PostController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity<?> getPosts() {
+    public ResponseEntity<?> getPosts(){
         return ResponseEntity.ok(postService.getPosts());
+    }
+
+
+    @GetMapping("/getWithPagination")
+    public ResponseEntity<?> getPostsWithPagination( @RequestParam(defaultValue = "0") Integer page,
+                                       @RequestParam(defaultValue = "5") Integer size) {
+        return ResponseEntity.ok(postService.getPostsWithPagination(page, size));
     }
 
     @PostMapping
