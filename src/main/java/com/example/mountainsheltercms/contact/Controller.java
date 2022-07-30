@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/api/contact")
@@ -24,6 +26,11 @@ class Controller {
         contactDB.setPaymentAccount(contact.getPaymentAccount());
 
         return contactDB;
+    }
+
+    @GetMapping()
+    public List<Contact> getContacts() {
+        return contactRepository.findAll();
     }
 
 
