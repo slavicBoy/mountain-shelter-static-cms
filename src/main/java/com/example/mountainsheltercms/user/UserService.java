@@ -50,7 +50,7 @@ public class UserService {
         Set<Role> roles = new HashSet<>();
 
         if (strRoles == null) {
-            Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+            Role userRole = roleRepository.findByName(ERole.ROLE_ADMIN)
                     .orElseThrow(() -> new RoleException(RoleError.ROLE_NOT_FOUND));
             roles.add(userRole);
         } else {

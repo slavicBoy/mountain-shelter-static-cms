@@ -23,7 +23,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR')")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         userService.registerUser(signUpRequest);
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
