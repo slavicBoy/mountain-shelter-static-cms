@@ -15,7 +15,7 @@ class OfferController {
     @Autowired
     OfferRepository offerRepository;
 
-    @PutMapping()
+    @PutMapping("/{id}")
     @Transactional
     public Offer editOffer(@PathVariable Long id, @RequestBody Offer offer) {
         final var offerDB = offerRepository.getById(id);
